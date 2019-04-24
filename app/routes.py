@@ -26,9 +26,12 @@ def user_handler():
 @app.route("/provider", methods=["POST", "DELETE"])
 def provider_handler():
     if request.method == "POST":
-        pass # create provider
+        content = request.get_json()
+        db.create_provider(content["providername"],
+                    content["email"], content["password"])
     elif request.method == "DELETE":
-        pass # delete provider
+        content = request.get_json()
+        db.remove_provider(content["providername"])
 
 @app.route("/request", methods=["POST"])
 def request_handler():

@@ -1,10 +1,10 @@
 import pyrebase
 
 config = {
-  "apiKey": "AIzaSyDsoYLse6FrkbClDm-C0BoLg_m7U0yyBps",
-  "authDomain": "easykey-160212.firebaseapp.com",
-  "databaseURL": "https://easykey-160212.firebaseio.com",
-  "storageBucket": "easykey-160212.appspot.com"
+  "apiKey": "AIzaSyAc9SAym94EeJbciccRESpgNm4WISzl-GM",
+  "authDomain": "easykey-53a02.firebaseapp.com",
+  "databaseURL": "https://easykey-53a02.firebaseio.com",
+  "storageBucket": "easykey-53a02.appspot.com"
 }
 
 firebase = pyrebase.initialize_app(config)
@@ -24,8 +24,12 @@ def remove_user(username):
 def create_provider(providername, email, password):
     db.child("providers").child(providername).set({
         "email" : email,
-        "password" : password
+        "password" : password,
     })
+
+def get_provider_key(providername):
+    return db.child("providers").child(providername).child("password").get().val()
+
 
 def remove_provider(providername):
     db.child("providers").child(providername).remove()
@@ -41,7 +45,7 @@ def create_request(provider, request_type, request_description, fields, success,
         "provider" : provider,
         "type" : request_type,
         "description" : request_description,
-        "fields" : ",".join(fields),
+        "fields" : fields,
         "success" : success,
         "failure" : failure,
         "status" : "none"
