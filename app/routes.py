@@ -32,6 +32,7 @@ def provider_handler():
     elif request.method == "DELETE":
         content = request.get_json()
         db.remove_provider(content["providername"])
+    return "DONE"
 
 @app.route("/request", methods=["POST"])
 def request_handler():
