@@ -41,3 +41,10 @@ def request_handler():
         db.create_request(content["providername"],content["type"],content["description"], 
             content["fields"], content["success"],content["failure"], content["username"])
         return "REQUEST CREATED"
+
+@app.route("/request-status/<username>/<id>")
+def status_handler(username, id):
+    status = db.get_request_status(username, id)
+    return {
+        "status" : status
+    }

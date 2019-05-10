@@ -39,6 +39,10 @@ def get_requests(username):
     req = db.child("requests").child(username).get()
     return req.val() 
 
+def get_request_status(username, id):
+    req = db.child("requests").child(username).child(id).child("status").get()
+    return req.val()
+
 
 def create_request(provider, request_type, request_description, fields, success, failure, username):
     db.child("requests").child(username).push({
