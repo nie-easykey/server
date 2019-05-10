@@ -1,5 +1,5 @@
 from app import app, db
-from flask import request
+from flask import request, jsonify
 
 @app.route('/')
 @app.route('/index')
@@ -45,6 +45,6 @@ def request_handler():
 @app.route("/request-status/<username>/<id>")
 def status_handler(username, id):
     status = db.get_request_status(username, id)
-    return {
-        "status" : status
-    }
+    return jsonify({
+            "status" : status
+        })
