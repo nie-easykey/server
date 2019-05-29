@@ -20,6 +20,8 @@ def create_user(username, email, password):
 def remove_user(username):
     db.child("users").child(username).remove()
 
+def get_user(username):
+    db.child("users").child(username).get().val()
 
 def create_provider(providername, email, password):
     db.child("providers").child(providername).set({
@@ -43,6 +45,9 @@ def get_request_status(username, id):
     req = db.child("requests").child(username).child(id).child("status").get()
     return req.val()
 
+def get_request_fields(username, id):
+    req = db.child("requests").child(username).child(id).child("fields").get()
+    return req.val()
 
 def create_request(provider, request_type, request_description, fields, success, failure, username):
     a = db.child("requests").child(username).push({

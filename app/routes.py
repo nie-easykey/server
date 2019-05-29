@@ -48,6 +48,18 @@ def request_handler():
 @app.route("/request-status/<username>/<id>")
 def status_handler(username, id):
     status = db.get_request_status(username, id)
-    return jsonify({
+    data={}
+    if status == "approved":
+        fields = db.get_request_fields(username, id)
+        data = {
+            "status": status,
+            "username" : username
+        }
+        user = db.get_user(username)
+        for field in fields:
+            data[field] = user[field]
+    else:
+        data = {
             "status" : status
-        })
+        }
+    return jsonify(data)
