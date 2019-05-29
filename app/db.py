@@ -45,7 +45,7 @@ def get_request_status(username, id):
 
 
 def create_request(provider, request_type, request_description, fields, success, failure, username):
-    db.child("requests").child(username).push({
+    a = db.child("requests").child(username).push({
         "provider" : provider,
         "type" : request_type,
         "description" : request_description,
@@ -54,3 +54,8 @@ def create_request(provider, request_type, request_description, fields, success,
         "failure" : failure,
         "status" : "none"
     })
+    return a["name"]
+
+if __name__=="__main__":
+    create_request("provider", "request_type", "request_description", "fields", "success", "failure", "abhinav")
+    

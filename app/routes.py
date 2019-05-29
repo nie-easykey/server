@@ -41,9 +41,9 @@ def provider_handler():
 def request_handler():
     if request.method == "POST":
         content = request.get_json()
-        db.create_request(content["providername"],content["type"],content["description"], 
+        return db.create_request(content["providername"],content["type"],content["description"], 
             content["fields"], content["success"],content["failure"], content["username"])
-        return "REQUEST CREATED"
+#        return "REQUEST CREATED"
 
 @app.route("/request-status/<username>/<id>")
 def status_handler(username, id):
