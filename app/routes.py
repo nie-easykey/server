@@ -2,10 +2,10 @@ from app import app, db
 from flask import request, jsonify
 from flask_cors import CORS
 
-@app.route('/')
-@app.route('/index')
 CORS(app)
 
+@app.route('/')
+@app.route('/index')
 def index():
     return "Hello, World!"
 
