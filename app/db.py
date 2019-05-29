@@ -21,7 +21,7 @@ def remove_user(username):
     db.child("users").child(username).remove()
 
 def get_user(username):
-    db.child("users").child(username).get().val()
+    return db.child("users").child(username).get().val()
 
 def create_provider(providername, email, password):
     db.child("providers").child(providername).set({
